@@ -58,8 +58,8 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopol
           // Product.insertMany(products);
           // console.log('KPIs inserted');
           // console.log('Products inserted');
-          Transaction.insertMany(transactions);
-          console.log("Transactions inserted");
+          // Transaction.insertMany(transactions);
+          // console.log("Transactions inserted");
         } catch (error) {
           console.error('Error inserting KPIs', error);
         }
