@@ -54,12 +54,12 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopol
         try {
           // Uncomment if you want to drop the database
           // await db.dropDatabase();
-          //await KPI.insertMany(kpis);
+          // await KPI.insertMany(kpis);
           // Product.insertMany(products);
-          //console.log('KPIs inserted');
+          // console.log('KPIs inserted');
           // console.log('Products inserted');
-          // Transaction.insertMany(transactions);
-          // console.log("Transactions inserted");
+          Transaction.insertMany(transactions);
+          console.log("Transactions inserted");
         } catch (error) {
           console.error('Error inserting KPIs', error);
         }

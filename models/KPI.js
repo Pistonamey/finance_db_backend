@@ -1,21 +1,22 @@
 import mongoose from "mongoose";
-import { loadType } from "mongoose-currency";
 
 const Schema = mongoose.Schema;
-loadType(mongoose);
+
+const currencySetter = (v) => typeof v === 'string' ? parseFloat(v.replace(/[^\d.-]/g, "")) * 100 : v;
+const currencyGetter = (v) => v / 100;
 
 const daySchema = new Schema(
   {
     date: String,
     revenue: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
     expenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
   },
   { toJSON: { getters: true } }
@@ -25,24 +26,24 @@ const monthSchema = new Schema(
   {
     month: String,
     revenue: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
     expenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
     operationalExpenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
     nonOperationalExpenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
   },
   { toJSON: { getters: true } }
@@ -51,26 +52,26 @@ const monthSchema = new Schema(
 const KPISchema = new Schema(
   {
     totalProfit: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
     totalRevenue: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
     totalExpenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
     expensesByCategory: {
       type: Map,
       of: {
-        type: mongoose.Types.Currency,
-        currency: "USD",
-        get: (v) => v / 100,
+        type: Number,
+        set: currencySetter,
+        get: currencyGetter,
       },
     },
     monthlyData: [monthSchema],

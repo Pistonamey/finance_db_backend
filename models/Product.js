@@ -1,20 +1,21 @@
 import mongoose from "mongoose";
-import { loadType } from "mongoose-currency";
 
 const Schema = mongoose.Schema;
-loadType(mongoose);
+
+const currencySetter = (v) => typeof v === 'string' ? parseFloat(v.replace(/[^\d.-]/g, "")) * 100 : v;
+const currencyGetter = (v) => v / 100;
 
 const ProductSchema = new Schema(
   {
     price: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
     expense: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v / 100,
+      type: Number,
+      set: currencySetter,
+      get: currencyGetter,
     },
     transactions: [
       {
